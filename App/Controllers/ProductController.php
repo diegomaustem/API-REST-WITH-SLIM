@@ -8,7 +8,10 @@ final class ProductController
 {
     public function getProducts(Request $request, Response $response, array $args): Response
     {
-        $response->getBody()->write('Hello Word!');
+        $response = $response->withJson([
+            "message" => "Hello Word"
+        ]); 
+        return $response;
     }
 }
 
