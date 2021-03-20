@@ -25,9 +25,9 @@ final class LojaController
 
         $lojasDAO = new LojasDAO();
         $loja = new LojaModel();
-        $loja->setNome($data['nome']);
-        $loja->setEndereco($data['endereco']);
-        $loja->setTelefone($data['telefone']);
+        $loja->setNome($data['nome'])
+            ->setEndereco($data['endereco'])
+            ->setTelefone($data['telefone']);
         $lojasDAO->insertLoja($loja);
 
         $response = $response->withJson([
@@ -39,17 +39,34 @@ final class LojaController
 
     public function updateLoja(Request $request, Response $response, array $args): Response
     {
+        $data = $request->getParsedBody();
+
+        $lojasDAO = new LojasDAO();
+        $loja = new LojaModel();
+        $loja->setId((int)$data['id'])
+            ->setNome($data['nome'])
+            ->setEndereco($data['endereco'])
+            ->setTelefone($data['telefone']);
+        $lojasDAO->updateLoja($loja);
+
         $response = $response->withJson([
-            'message' => 'Update or Update'
+            'message' => 'Loja atualizada com sucesso!'
         ]);
         return $response;
     }
 
     public function deleteLoja(Request $request, Response $response, array $args): Response
     {
+        $queryParams = $request->getQueryParams();
+
+        $lojasDAO = new LojasDAO();
+        $id = (int)$queryParams['id'];
+        $lojasDAO->deleteLoja($id);
+
         $response = $response->withJson([
-            'message' => 'Delete or Delete'
+            'message' => 'Loja deletada com sucesso!'
         ]);
+
         return $response;
     }
 }

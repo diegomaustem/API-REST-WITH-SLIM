@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\DAO\MySQL\LojasDAO;
+use App\DAO\MySQL\ProdutosDAO;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -10,9 +10,15 @@ final class ProdutoController
 {
     public function getProdutos(Request $request, Response $response, array $args): Response
     {
+
+        $produtosDAO = new ProdutosDAO();
+        $produtos = $produtosDAO->getAllProdutos();
+        $reponse = $response->withJson($produtos);
+
         $response = $response->withJson([
             'message' => 'getProducts'
         ]);
+        
         return $response;
     }
 
