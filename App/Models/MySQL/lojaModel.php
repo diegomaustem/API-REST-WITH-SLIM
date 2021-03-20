@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model\MySQL;
+namespace App\Models\MySQL;
 
 final class LojaModel
 {

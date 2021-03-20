@@ -1,7 +1,7 @@
 <?php
 
 namespace App\DAO\MySQL;
-use App\Model\MySQL\LojaModel;
+use App\Models\MySQL\LojaModel;
 
 class LojasDAO extends Conexao
 {
